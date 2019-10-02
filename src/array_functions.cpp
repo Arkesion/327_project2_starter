@@ -1,8 +1,8 @@
 /*
  * functionstocomplete.cpp
  *
- *  Created on: Sep 10, 2017
- *      Author: keith
+ *  Created on: October 2, 2019
+ *      Author: Kevin Quirici
  */
 
 //============================================================================
@@ -15,34 +15,49 @@
 #include "array_functions.h"
 #include "constants.h"
 #include "utilities.h"
-//============================================================================
+
+using namespace constants;
+
 
 //============================================================================
-//	stuff you will need
-//============================================================================
-//TODO define a structure to track words and number of times they occur
+
+//Variables
 
 struct track {
 	std::string word;
-	int word_occur;
+	int word_count;
 };
 
+track words[MAX_WORDS];
+int size = 0;
 
-//TODO add a global array of entry structs (global to this file)
-track array[constants::MAX_WORDS];
+//=============================================================================
 
+//Functions
 
-//TODO add variable to keep track of next available slot in array
+//resets size to 0, cleans out all words in array, resets word count to 0
+void clearArray() {
+	size = 0;
+	for (int i = 0; i <MAX_WORDS; i++) {
+		words[i].word_count = 0;
+		words[i].word = "";
+	}
+}
 
+//getter for size of array
+int getArraySize() {
+	return size;
+}
 
-//TODO define all functions in header file
-void clearArray() { }
+// returns word at int i in words
+std::string getArrayWordAt(int i) {
+	return words[i].word;
+}
 
-int getArraySize() { return 0; }
-
-std::string getArrayWordAt(int i) { return ""; }
-
-int getArrayWord_NumbOccur_At(int i){ return 0; }
+//returns the word count at i in words
+int getArrayWord_NumbOccur_At(int i) {
+	return words[i].word_count;
+}
 
 
 bool processFile(std::fstream &myfstream) { return false; }
