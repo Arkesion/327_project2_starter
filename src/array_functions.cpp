@@ -83,6 +83,24 @@ int writeArraytoFile(const std::string &outputfilename) {
 
 void sortArray(constants::sortOrder so) {
 
+	switch (so) {
+	case ASCENDING:
+		for (int i = 0; i < size; i++) {
+			for(int j = i+1; j < size; j++) {
+				std::string first= words[i].word;
+				std::string second = words[j].word;
+
+				toUpper(first);
+				toUpper(second);
+
+				if (first > second) {
+					std::string tempWord = words[i].word;
+					int tempInt = words[i].word_count;
+				}
+			}
+		}
+	}
+
 }
 
 //TODO look in utilities.h for useful functions, particularly strip_unwanted_chars!
