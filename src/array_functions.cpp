@@ -60,7 +60,22 @@ int getArrayWord_NumbOccur_At(int i) {
 }
 
 
-bool processFile(std::fstream &myfstream) { return false; }
+bool processFile(std::fstream &myfstream) {
+
+	if (!myfstream.is_open())
+		return false;
+
+	std::string line;
+
+	while (!myfstream.eof()) {
+		getline(myfstream,line);
+		processLine(line);
+	}
+
+	myfstream.close();
+	return true;
+
+}
 
 void processLine(std::string &myString) { }
 
