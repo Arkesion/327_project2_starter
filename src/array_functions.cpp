@@ -62,12 +62,13 @@ int getArrayWord_NumbOccur_At(int i) {
 
 bool processFile(std::fstream &myfstream) {
 
+	//check if filestream open
 	if (!myfstream.is_open())
 		return false;
 
 	std::string line;
 
-	while (!myfstream.eof()) {
+	while (!myfstream.eof()) { //eof: end of file
 		getline(myfstream,line);
 		processLine(line);
 	}
@@ -91,6 +92,7 @@ void processLine(std::string &myString) {
 void processToken(std::string &token) {
 	strip_unwanted_chars(token);
 
+	//if empty token
 	if(token == "") {
 		return;
 	}
@@ -115,11 +117,27 @@ void processToken(std::string &token) {
 
 
 bool openFile(std::fstream& myfile, const std::string& myFileName, std::ios_base::openmode mode) {
+
+	//check if file already open
+	if (myfile.is_open())
+		return false;
+
+	//open file
 	myfile.open(myFileName.c_str(), mode);
-	return true;
+
+	//check if file has succesfully opened
+	if (myfile.is_open())
+		return true;
+	else
+		return false;
 }
 
 void closeFile(std::fstream& myfile) {
+	//check if file already open
+	if (!myfile.is_open())
+		return;
+
+	//close file
 	myfile.close();
 }
 
@@ -130,6 +148,8 @@ int writeArraytoFile(const std::string &outputfilename) {
 
 void sortArray(constants::sortOrder so) {
 
+
+	//switch cases for enumeration of sort order.
 	switch (so) {
 	case ASCENDING:
 		for (int i = 0; i < size; i++) {
