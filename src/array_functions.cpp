@@ -87,20 +87,31 @@ void sortArray(constants::sortOrder so) {
 	case ASCENDING:
 		for (int i = 0; i < size; i++) {
 			for(int j = i+1; j < size; j++) {
-				std::string first= words[i].word;
-				std::string second = words[j].word;
+				std::string firstWord= words[i].word;
+				std::string secondWord = words[j].word;
 
-				toUpper(first);
-				toUpper(second);
+				toUpper(firstWord);
+				toUpper(secondWord);
 
-				if (first > second) {
+				if (firstWord > secondWord) {
 					std::string tempWord = words[i].word;
 					int tempInt = words[i].word_count;
+
+
+					words[i].word = words[j].word;
+					words[i].word_count = words[j].word_count;
+
+					words[j].word = tempWord;
+					words[j].word_count = tempInt;
 				}
 			}
 		}
+		break;
+	case DESCENDING:
+		break;
+	case NUMBER_OCCURRENCES:
+		break;
+	case NONE:
+		break;
 	}
-
 }
-
-//TODO look in utilities.h for useful functions, particularly strip_unwanted_chars!
