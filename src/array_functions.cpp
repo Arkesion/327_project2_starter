@@ -141,13 +141,29 @@ void closeFile(std::fstream& myfile) {
 	myfile.close();
 }
 
-
 int writeArraytoFile(const std::string &outputfilename) {
-	return constants::SUCCESS;
+
+	if (size == 0)
+		return FAIL_NO_ARRAY_DATA;
+
+	std::ofstream file;
+	file.open(outputfilename.c_str());
+
+	//check if file did not open
+	if (!file.is_open()) {
+		file.close();
+		return FAIL_FILE_DID_NOT_OPEN;
+	}
+
+	//put array into file
+	for (int i = 0; i < size; i++)
+		file << words[i].word + " " + std::to_string(words[i].word_count) + "\n";
+
+	file.close();
+	return SUCCESS;
 }
 
-void sortArray(constants::sortOrder so) {
-
+void sortArray(sortOrder so) {
 
 	//switch cases for enumeration of sort order.
 	switch (so) {
