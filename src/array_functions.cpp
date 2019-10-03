@@ -77,9 +77,41 @@ bool processFile(std::fstream &myfstream) {
 
 }
 
-void processLine(std::string &myString) { }
+void processLine(std::string &myString) {
 
-void processToken(std::string &token) { }
+	std::stringstream stream(myString);
+	std::string token;
+
+	while(getline(stream,token,CHAR_TO_SEARCH_FOR)) {
+		processToken(token);
+	}
+
+}
+
+void processToken(std::string &token) {
+	strip_unwanted_chars(token);
+
+	if(token == "") {
+		return;
+	}
+
+	for (int i = 0; i < MAX_WORDS; i++) {
+		std::string tempToken  = token;
+		std::string tempWord = words[i].word;
+
+		toUpper(tempToken);
+		toUpper(tempWord);
+
+		if(tempToken == tempWord) {
+			words[i].word_count++;
+			return;
+		}
+	}
+
+	words[size].word = token;
+	words[size].word_count = 1;
+	size++;
+}
 
 
 bool openFile(std::fstream& myfile, const std::string& myFileName, std::ios_base::openmode mode) {
